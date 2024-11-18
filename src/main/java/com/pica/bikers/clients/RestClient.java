@@ -15,9 +15,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RestClient {
 
-    @Value("${HOST:http://localhost}")
+    @Value("${HOST}")
     String host;
-    @Value("${PORT:8081}")
+    @Value("${PORT}")
     String port;
     private final RestTemplate restTemplate;
 
