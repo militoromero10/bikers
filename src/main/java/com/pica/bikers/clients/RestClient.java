@@ -15,22 +15,19 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RestClient {
 
-    @Value("${HOST:localhost}")
+    @Value("${HOST:http://localhost}")
     String host;
     @Value("${PORT:8081}")
     String port;
     private final RestTemplate restTemplate;
 
     public List<ChallengeDto> fetchAllByChallengeLevel(ChallengeLevel level) {
-        String url = String.format("http://%s:%s/api/challenges/level/{cl}", host, port);
-        System.out.println(">>>>>>>>>>>>>"+url);
+        String url = String.format("%s:%s/api/challenges/level/{cl}", host, port);
         return restTemplate.exchange(url,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<ChallengeDto>>() {},
                 level.getCode()
         ).getBody();
-
-//        return restTemplate.getForObject(url, List.class, level.getCode());
     }
 }
