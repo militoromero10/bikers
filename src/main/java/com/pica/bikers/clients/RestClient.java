@@ -3,6 +3,7 @@ package com.pica.bikers.clients;
 import com.pica.bikers.challenge.external.ChallengeDto;
 import com.pica.bikers.challenge.external.ChallengeLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -11,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class RestClient {
@@ -23,6 +25,7 @@ public class RestClient {
 
     public List<ChallengeDto> fetchAllByChallengeLevel(ChallengeLevel level) {
         String url = String.format("%s:%s/api/challenges/level/{cl}", host, port);
+        log.info("Rest call to : {}", url);
         return restTemplate.exchange(url,
                 HttpMethod.GET,
                 null,
