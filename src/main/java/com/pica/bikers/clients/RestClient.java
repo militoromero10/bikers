@@ -19,12 +19,10 @@ public class RestClient {
 
     @Value("${HOST}")
     String host;
-    @Value("${PORT}")
-    String port;
     private final RestTemplate restTemplate;
 
     public List<ChallengeDto> fetchAllByChallengeLevel(ChallengeLevel level) {
-        String url = String.format("%s:%s/api/challenges/level/{cl}", host, port);
+        String url = String.format("%s/api/challenges/level/{cl}", host);
         log.info("Rest call to : {}", url);
         return restTemplate.exchange(url,
                 HttpMethod.GET,
